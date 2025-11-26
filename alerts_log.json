@@ -1,0 +1,1514 @@
+[
+  {
+    "timestamp": "2025-11-26T20:51:00.109741",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T20:51:00.111681",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T20:51:00.133733",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T20:51:00.153786",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T20:56:01.861930",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T20:56:01.893186",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T20:56:01.918673",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T20:56:01.944477",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:01:05.503025",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:01:05.536852",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:01:05.568852",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:01:05.596240",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:06:09.212235",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:06:09.272718",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:06:09.326506",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:06:09.360888",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:11:13.232564",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:11:13.267206",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:11:13.300838",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:11:13.340994",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:16:16.979810",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:16:17.021124",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:16:17.079838",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:16:17.117255",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:21:20.840620",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:21:20.883622",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:21:20.922468",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:21:20.958043",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:26:24.740264",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:26:24.770903",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:26:24.802636",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:26:24.838422",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:31:28.312692",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:31:28.350663",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:31:28.416481",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:31:28.452966",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:36:32.227551",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:36:32.261409",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:36:32.289814",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:36:32.320743",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:41:35.806809",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:41:35.835010",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:41:35.864251",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:41:35.901368",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:46:39.515930",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:46:39.541296",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:46:39.587349",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:46:39.632045",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:51:43.113752",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:51:43.147197",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:51:43.176998",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:51:43.217125",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T21:56:46.941280",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T21:56:46.991042",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T21:56:47.046632",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T21:56:47.087931",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:01:50.533371",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:01:50.562955",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:01:50.587886",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:01:50.618637",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:06:54.347162",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:06:54.381400",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:06:54.415716",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:06:54.450798",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:11:58.158103",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:11:58.187909",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:11:58.212138",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:11:58.242960",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:17:02.017169",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:17:02.065496",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:17:02.104376",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:17:02.144778",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:22:05.883748",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:22:05.915424",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:22:05.945432",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:22:05.998958",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:27:09.748630",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:27:09.789702",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:27:09.850780",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:27:09.892115",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:32:13.517819",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:32:13.568628",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:32:13.629648",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:32:13.676828",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:37:17.276222",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:37:17.405655",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:37:17.565488",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:37:17.644581",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:42:21.755229",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:42:21.800895",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:42:21.859142",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:42:21.899140",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:47:25.765464",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:47:25.815296",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:47:25.856683",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:47:25.911061",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:52:29.878819",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:52:29.915001",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:52:29.954057",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:52:29.991346",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T22:57:33.476888",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T22:57:33.524371",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T22:57:33.577621",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T22:57:33.623554",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:02:37.380774",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:02:37.427651",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:02:37.485690",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:02:37.529704",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:07:41.304654",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:07:41.341889",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:07:41.372841",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:07:41.410793",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:12:44.670501",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:12:44.696080",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:12:44.718716",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:12:44.765824",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:17:47.961795",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:17:47.988680",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:17:48.013506",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:17:48.065116",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:22:51.124942",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:22:51.173234",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:22:51.219014",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:22:51.257921",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:27:54.987364",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:27:55.034613",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:27:55.060279",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:27:55.088186",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:32:58.636360",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:32:58.680531",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:32:58.725589",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:32:58.766649",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:38:00.769807",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:38:00.804812",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:38:00.824948",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:38:00.863869",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:43:02.664973",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:43:02.685557",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:43:02.704061",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:43:02.736609",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:48:04.461813",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:48:04.490721",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:48:04.524605",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:48:04.557045",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:53:06.156786",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:53:06.189941",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:53:06.208371",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:53:06.243761",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-26T23:58:07.987718",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-26T23:58:08.018292",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-26T23:58:08.044256",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-26T23:58:08.072649",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:03:09.745818",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:03:09.777179",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:03:09.808077",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:03:09.826274",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:08:11.514992",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:08:11.553642",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:08:11.594710",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:08:11.614587",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:13:13.276296",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:13:13.312909",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:13:13.336927",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:13:13.363782",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:18:14.994516",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:18:15.027912",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:18:15.065831",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:18:15.094303",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:23:19.160991",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:23:19.221218",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:23:19.284752",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:23:19.338096",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:28:22.225610",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:28:22.288295",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:28:22.336689",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:28:22.380885",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:33:26.049010",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:33:26.094932",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:33:26.138541",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:33:26.175708",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:38:29.627124",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:38:29.665787",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:38:29.726717",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:38:29.780703",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:43:33.487214",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:43:33.520203",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:43:33.557388",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:43:33.594359",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:48:36.509349",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:48:36.554953",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:48:36.596774",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:48:36.634945",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:52:07.435799",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:52:07.471828",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:52:07.506170",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:52:07.541247",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T00:57:12.431574",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T00:57:12.455940",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T00:57:12.496808",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T00:57:12.544784",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T01:02:19.119060",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T01:02:19.171972",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T01:02:19.221445",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T01:02:19.271709",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T01:07:20.805592",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T01:07:20.830304",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T01:07:20.854299",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T01:07:20.882765",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T01:12:22.318333",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T01:12:22.325188",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T01:12:22.368460",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T01:12:22.412637",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-27T01:17:28.055664",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 20, projected 7-day usage 128. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-27T01:17:28.189328",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "N95 Masks",
+    "message": "[INVENTORY ALERT] N95 Masks: stock 100, projected 7-day usage 311. Action: Order 200 N95 masks"
+  },
+  {
+    "timestamp": "2025-11-27T01:17:28.233641",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Paracetamol Strips",
+    "message": "[INVENTORY ALERT] Paracetamol Strips: stock 200, projected 7-day usage 1698. Action: Order 300 paracetamol strips"
+  },
+  {
+    "timestamp": "2025-11-27T01:17:28.366543",
+    "channel": "log-only",
+    "category": "anomaly",
+    "metric": "er_visits",
+    "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  }
+]
