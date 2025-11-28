@@ -80,16 +80,28 @@ def run_forecast_for_column(df, column_name, horizon_days=FORECAST_HORIZON_DAYS)
 
 def detect_anomaly(df, column_name="er_visits", window=14, threshold_std=2.0):
     """Simple anomaly: last value deviates > threshold_std * std from rolling mean."""
-    series = df[column_name].tail(window + 1)
-    if len(series) < window + 1:
-        return None
+    # compute model residuals (if Prophet available)
+    try:
+        from prophet import Prophet
+        df_prop = df.rename(columns={'date':'ds', column_name:'y'})
+        m = Prophet()
+        m.add_regressor('aqi'); m.add_regressor('temp_c'); m.add_regressor('festival')
+        m.fit(df_prop)
+        pred = m.predict(df_prop[['ds']])
+        resid = df[column_name] - pred['yhat']
+        last_val = resid.iloc[-1]
+        prev = resid.iloc[-(window+1):-1]
+        mean = prev.mean()
+        std = prev.std() if prev.std() > 0 else 1e-6
+        z_score = (last_val - mean) / std
+    except Exception:
+    # fallback to simple approach
+        series = df[column_name].tail(window + 1)
+        last_val = series.iloc[-1]
+        prev = series.iloc[:-1]
+        mean = prev.mean(); std = prev.std() if prev.std()>0 else 1e-6
+        z_score = (last_val - mean) / std
 
-    last_val = series.iloc[-1]
-    prev = series.iloc[:-1]
-    mean = prev.mean()
-    std = prev.std() if prev.std() > 0 else 1e-6
-
-    z_score = (last_val - mean) / std
 
     if abs(z_score) >= threshold_std:
         level = "high" if z_score > 0 else "low"

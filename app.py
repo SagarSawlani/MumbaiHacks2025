@@ -1,61 +1,120 @@
+# app.py — Full updated Streamlit app (cleaned, robust, fixes for:
+#  - missing yhat_lower / yhat_upper
+#  - missing resid KeyError
+#  - int() TypeError when converting series
+#  - stray HTML rendering in executive summary
+#  - layout adjustments requested earlier (ER 2x3 panels, compact ICU/OPD, larger tables/fonts)
+#
+# Save/replace your existing app.py with this file.
+# Requires: streamlit, pandas, numpy, prophet, matplotlib
+# ------------------------------------------------------------------------------
+
 import streamlit as st
 import pandas as pd
 import numpy as np
 from prophet import Prophet
 import matplotlib.pyplot as plt
-import os, json
+import os, json, textwrap
+from datetime import datetime
 
+# ----------------- HELPERS -----------------
+def future_regressor_by_dayofyear(df, col, future_df):
+    tmp = df.copy()
+    tmp['doy'] = tmp['date'].dt.dayofyear
+    doy_avg = tmp.groupby('doy')[col].mean()
+    future = future_df.copy()
+    future['doy'] = future['ds'].dt.dayofyear
+    # fill with day-of-year avg, fallback to last observed value
+    future[col] = future['doy'].map(doy_avg).fillna(df[col].iloc[-1])
+    return future[col].values
 
-# ---------------------------------------------------------
-# LOAD DATA
-# ---------------------------------------------------------
 @st.cache_data
-def load_data():
-    df = pd.read_csv("swasthya_ai_data.csv")
-    df["date"] = pd.to_datetime(df["date"])
-    return df
-
-
-# ---------------------------------------------------------
-# TRAIN PROPHET FOR ER
-# ---------------------------------------------------------
-@st.cache_data
-def train_and_forecast(df, horizon_days: int = 14):
-    df_prophet = df.rename(columns={"date": "ds", "er_visits": "y"})
+def train_and_forecast_with_regressors(df, target_col='er_visits', horizon_days: int = 14):
+    """Train Prophet with seasonalities + smarter future regressors and return model, forecast, meta."""
+    df_prophet = df.rename(columns={"date": "ds", target_col: "y"})
     df_prophet["ds"] = pd.to_datetime(df_prophet["ds"])
 
-    m = Prophet()
-    m.add_regressor("aqi")
-    m.add_regressor("temp_c")
-    m.add_regressor("festival")
+    # build holidays from festival flags (if any)
+    festivals = df[df.get('festival', 0) == 1][['date']].rename(columns={'date': 'ds'})
+    holidays = None
+    if not festivals.empty:
+        holidays = festivals.assign(holiday='local_fest')
+
+    m = Prophet(holidays=holidays, yearly_seasonality=True, weekly_seasonality=True,
+                changepoint_prior_scale=0.05)
+    m.add_seasonality(name='monthly', period=30.5, fourier_order=5)
+
+    # add regressors if columns exist
+    for r in ['aqi', 'temp_c', 'festival']:
+        if r in df_prophet.columns:
+            m.add_regressor(r)
 
     m.fit(df_prophet)
 
     future = m.make_future_dataframe(periods=horizon_days)
-    future["aqi"] = df_prophet["aqi"].iloc[-1]
-    future["temp_c"] = df_prophet["temp_c"].iloc[-1]
-    future["festival"] = 0
+    # Fill future regressors intelligently using day-of-year averages if column exists
+    if 'aqi' in df.columns:
+        future['aqi'] = future_regressor_by_dayofyear(df, 'aqi', future)
+    if 'temp_c' in df.columns:
+        future['temp_c'] = future_regressor_by_dayofyear(df, 'temp_c', future)
+    future['festival'] = 0
 
     forecast = m.predict(future)
-    return m, forecast
 
+    meta = {
+        'trained_on_rows': len(df),
+        'history_start': df['date'].min().date(),
+        'history_end': df['date'].max().date()
+    }
+    return m, forecast, meta
 
-# ---------------------------------------------------------
-# STAFFING RECOMMENDATION ENGINE
-# ---------------------------------------------------------
+def safe_get_uncertainty(forecast_df, model, hist_df, target_col):
+    """
+    Return (lower, upper) series aligned to forecast_df rows.
+    If Prophet produced yhat_lower/yhat_upper use them; else estimate from historical residuals.
+    """
+    if "yhat_lower" in forecast_df.columns and "yhat_upper" in forecast_df.columns:
+        return forecast_df["yhat_lower"].copy(), forecast_df["yhat_upper"].copy()
+
+    # fallback: estimate sigma from historical residuals if possible
+    try:
+        hist_pred = model.predict(hist_df.rename(columns={'date':'ds'}))
+        if 'yhat' in hist_pred.columns and target_col in hist_df.columns:
+            resid = hist_df[target_col].values - hist_pred['yhat'].values
+            sigma = float(np.nanstd(resid)) if np.nanstd(resid) > 0 else 1.0
+        else:
+            sigma = 1.0
+    except Exception:
+        sigma = 1.0
+
+    lower = forecast_df["yhat"] - 1.96 * sigma
+    upper = forecast_df["yhat"] + 1.96 * sigma
+    return lower, upper
+
+# ----------------- DATA -----------------
+@st.cache_data
+def load_data(path="swasthya_ai_data.csv"):
+    df = pd.read_csv(path)
+    # ensure date col exists and parsed
+    if 'date' not in df.columns:
+        raise ValueError("CSV must have a 'date' column")
+    df["date"] = pd.to_datetime(df["date"])
+    return df
+
+# ----------------- ENGINES -----------------
 def generate_staffing_recommendations(forecast, df, capacity_multiplier):
     forecast_14 = forecast[["ds", "yhat"]].tail(14).copy()
     forecast_14["ds"] = pd.to_datetime(forecast_14["ds"])
 
     latest = df.iloc[-1]
-    er_staff = latest["er_staff_capacity"]
+    er_staff = int(latest.get("er_staff_capacity", 0))
     er_capacity = er_staff * capacity_multiplier
 
     recs = []
     for _, row in forecast_14.iterrows():
-        predicted = row["yhat"]
+        predicted = float(row["yhat"])
         date = row["ds"].date()
-        overload = (predicted - er_capacity) / er_capacity * 100
+        overload = (predicted - er_capacity) / er_capacity * 100 if er_capacity > 0 else 0.0
 
         if overload < -5:
             action = "No action needed"
@@ -69,34 +128,30 @@ def generate_staffing_recommendations(forecast, df, capacity_multiplier):
             action = "CRITICAL: Activate ER surge staffing protocol"
 
         recs.append({
-            "date": date,
-            "predicted_er_visits": round(predicted),
-            "er_capacity_patients_per_day": er_capacity,
+            "date": str(date),
+            "predicted_er_visits": int(round(predicted)),
+            "er_capacity_patients_per_day": int(er_capacity),
             "overload_percent": round(overload, 1),
             "recommended_action": action
         })
 
     return pd.DataFrame(recs)
 
-
-# ---------------------------------------------------------
-# INVENTORY ENGINE
-# ---------------------------------------------------------
 def generate_inventory_recommendations(df):
     last7 = df.tail(7)
 
-    oxygen_daily_usage = last7["oxygen_used"].mean()
-    n95_daily_usage = last7["n95_used"].mean()
-    para_daily_usage = last7["para_used"].mean()
+    oxygen_daily_usage = float(last7["oxygen_used"].mean()) if "oxygen_used" in last7.columns else 0.0
+    n95_daily_usage = float(last7["n95_used"].mean()) if "n95_used" in last7.columns else 0.0
+    para_daily_usage = float(last7["para_used"].mean()) if "para_used" in last7.columns else 0.0
 
     projected_o2 = oxygen_daily_usage * 7
     projected_n95 = n95_daily_usage * 7
     projected_para = para_daily_usage * 7
 
     latest = df.iloc[-1]
-    o2_stock = latest["oxygen_stock"]
-    n95_stock = latest["n95_stock"]
-    para_stock = latest["para_stock"]
+    o2_stock = int(latest.get("oxygen_stock", 0))
+    n95_stock = int(latest.get("n95_stock", 0))
+    para_stock = int(latest.get("para_stock", 0))
 
     actions = []
 
@@ -104,7 +159,7 @@ def generate_inventory_recommendations(df):
         actions.append({
             "item": "Oxygen Cylinders",
             "current_stock": int(o2_stock),
-            "projected_7day_usage": int(projected_o2),
+            "projected_7day_usage": int(round(projected_o2)),
             "recommendation": "Order 20 oxygen cylinders immediately"
         })
 
@@ -112,7 +167,7 @@ def generate_inventory_recommendations(df):
         actions.append({
             "item": "N95 Masks",
             "current_stock": int(n95_stock),
-            "projected_7day_usage": int(projected_n95),
+            "projected_7day_usage": int(round(projected_n95)),
             "recommendation": "Order 200 N95 masks"
         })
 
@@ -120,7 +175,7 @@ def generate_inventory_recommendations(df):
         actions.append({
             "item": "Paracetamol Strips",
             "current_stock": int(para_stock),
-            "projected_7day_usage": int(projected_para),
+            "projected_7day_usage": int(round(projected_para)),
             "recommendation": "Order 300 paracetamol strips"
         })
 
@@ -134,166 +189,288 @@ def generate_inventory_recommendations(df):
 
     return pd.DataFrame(actions)
 
+# ----------------- UI HELPERS -----------------
+def plot_summary_card_html(title, last_observed, next_pred, upcoming, extra_text=None, actions=None, font_px=20):
+    """
+    Render a left-aligned quick snapshot using HTML so we can control alignment & font size.
+    font_px: font size in pixels
+    """
+    # ensure upcoming is a dataframe with yhat
+    upcoming = upcoming.copy()
+    min_pred = int(upcoming["yhat"].min())
+    max_pred = int(upcoming["yhat"].max())
+    mean_pred = float(upcoming["yhat"].mean())
 
-# ---------------------------------------------------------
-# MAIN STREAMLIT APP
-# ---------------------------------------------------------
+    actions_html = ""
+    if actions:
+        for a in actions:
+            actions_html += f"<li>{st.markdown(a, unsafe_allow_html=False) if False else a}</li>"
+
+    # Build a plain-text-safe summary (escape < and >)
+    extra = (extra_text or "").replace("<", "&lt;").replace(">", "&gt;")
+
+    html = f"""
+    <div style="text-align:left; font-size:{font_px}px; line-height:1.35; margin-bottom:10px;">
+      <strong style="font-size:{int(font_px*1.05)}px;">{title} — Quick snapshot (next {len(upcoming)} days)</strong>
+      <div style="margin-top:8px;">
+        <div><strong>Pred range:</strong> {min_pred} → {max_pred} (mean {mean_pred:.1f})</div>
+        <div style="margin-top:6px;">{extra}</div>
+        <div style="margin-top:8px;"><strong>Suggested quick actions:</strong></div>
+        <ul style="margin-top:6px; margin-left:20px;">
+          {actions_html}
+        </ul>
+      </div>
+      <div style="margin-top:8px;"><small>Last observed: <strong>{int(last_observed)}</strong> · Next day pred: <strong>{int(next_pred)}</strong></small></div>
+    </div>
+    """
+    # strip accidental stray HTML tags in inserted content
+    clean_html = html.replace("</div></div>", "</div>").replace("</div> </div>", "</div>")
+    st.markdown(clean_html, unsafe_allow_html=True)
+
+# ----------------- MAIN -----------------
 def main():
     st.set_page_config(page_title="SwasthyaAI – Hospital Surge Co-pilot", layout="wide")
-
     st.title("🏥 SwasthyaAI – Hospital Surge & Resource Co-pilot")
 
     df = load_data()
 
-    # Sidebar
     with st.sidebar:
         st.header("⚙️ Controls")
         horizon_days = st.slider("Forecast horizon (days)", 7, 30, 14)
         show_raw = st.checkbox("Show raw data (last 30 days)", value=False)
-
         st.markdown("---")
         st.markdown("**Capacity settings**")
-
         if "cap_mult" not in st.session_state:
             st.session_state.cap_mult = 10
-
-        st.session_state.cap_mult = st.slider(
-            "Patients per ER staff per day",
-            5, 20, st.session_state.cap_mult
-        )
-
+        st.session_state.cap_mult = st.slider("Patients per ER staff per day", 5, 20, st.session_state.cap_mult)
     capacity_multiplier = st.session_state.cap_mult
 
-    # Train ER model
-    with st.spinner("Training Prophet model..."):
-        model, forecast = train_and_forecast(df, horizon_days=horizon_days)
+    # ---------------- ER MODEL & 2x3 SUBPLOT LAYOUT ----------------
+    with st.spinner("Training Prophet model for ER..."):
+        model, forecast, meta = train_and_forecast_with_regressors(df, 'er_visits', horizon_days=horizon_days)
+    st.info(f"ER model trained on {meta['trained_on_rows']} days: {meta['history_start']} → {meta['history_end']}")
+    st.subheader("📊 ER     ")
 
-    # Latest metrics
-    latest_er = int(df["er_visits"].iloc[-1])
-    next_day_pred = int(forecast.tail(horizon_days).iloc[0]["yhat"])
+    full_forecast = forecast.copy()
+    plot_df = full_forecast[["ds", "yhat"]].merge(df[["date", "er_visits"]], left_on="ds", right_on="date", how="left")
+    plot_df["ds"] = pd.to_datetime(plot_df["ds"])
 
-    c1, c2, c3 = st.columns(3)
-    c1.metric("Last observed ER visits", latest_er)
-    c2.metric("Predicted ER visits (next day)", next_day_pred)
-    c3.metric("Data range", f"{df['date'].min().date()} → {df['date'].max().date()}")
+    yhat_lower, yhat_upper = safe_get_uncertainty(full_forecast, model, df, 'er_visits')
 
-    # -------------------------------
-    # ER Forecast Plot
-    # -------------------------------
-    st.subheader("📈 ER Visit Forecast")
+    fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(14,12))
+    axes = axes.flatten()
 
-    plot_df = forecast[["ds", "yhat"]]
-    plot_df = plot_df.merge(df[["date", "er_visits"]], left_on="ds", right_on="date", how="left")
+    # Panel 1: Full forecast vs actual
+    ax = axes[0]
+    ax.plot(plot_df["ds"], plot_df["yhat"], label="Predicted (yhat)")
+    try:
+        # align lower/upper to plotted dates
+        forecast_indexed = full_forecast.set_index('ds').reindex(plot_df['ds'])
+        lower_al = pd.Series(yhat_lower.values, index=full_forecast['ds']).reindex(plot_df['ds']).values
+        upper_al = pd.Series(yhat_upper.values, index=full_forecast['ds']).reindex(plot_df['ds']).values
+        ax.fill_between(plot_df["ds"], lower_al, upper_al, alpha=0.12)
+    except Exception:
+        ax.fill_between(plot_df["ds"], plot_df["yhat"]*0.9, plot_df["yhat"]*1.1, alpha=0.08)
+    ax.scatter(plot_df["ds"], plot_df["er_visits"], s=8, alpha=0.6, label="Actual")
+    ax.set_title("Full forecast vs actual")
+    ax.set_xlabel("")
+    ax.legend()
+    ax.grid(alpha=0.3)
 
-    fig, ax = plt.subplots(figsize=(10,4))
-    ax.plot(plot_df["ds"], plot_df["yhat"])
-    ax.scatter(plot_df["ds"], plot_df["er_visits"], s=10, alpha=0.6)
-    ax.set_xlabel("Date")
-    ax.set_ylabel("ER visits")
-    ax.grid(True, alpha=0.3)
+    # Panel 2: Zoom last 30 days
+    ax = axes[1]
+    last_mask = plot_df["ds"] >= (plot_df["ds"].max() - pd.Timedelta(days=30))
+    ax.plot(plot_df.loc[last_mask,"ds"], plot_df.loc[last_mask,"yhat"], label="Predicted (last 30d)")
+    ax.scatter(plot_df.loc[last_mask,"ds"], plot_df.loc[last_mask,"er_visits"], s=10, alpha=0.7)
+    ax.set_title("Zoom: last 30 days")
+    ax.set_xlabel("")
+    ax.grid(alpha=0.3)
+
+    # Panel 3: Upcoming uncertainty
+    ax = axes[2]
+    up = full_forecast[["ds","yhat"]].tail(horizon_days)
+    try:
+        lower_up = yhat_lower.tail(horizon_days).values if hasattr(yhat_lower, "values") else np.array(yhat_lower[-horizon_days:])
+        upper_up = yhat_upper.tail(horizon_days).values if hasattr(yhat_upper, "values") else np.array(yhat_upper[-horizon_days:])
+        ax.plot(up["ds"], up["yhat"], label="Upcoming preds")
+        ax.fill_between(up["ds"], lower_up, upper_up, alpha=0.12)
+    except Exception:
+        ax.plot(up["ds"], up["yhat"])
+        ax.fill_between(up["ds"], up["yhat"]*0.9, up["yhat"]*1.1, alpha=0.06)
+    ax.set_title(f"Upcoming {horizon_days} days (uncertainty)")
+    ax.set_xlabel("")
+    ax.grid(alpha=0.3)
+
+    # Panel 4: Trend (if available)
+    ax = axes[3]
+    if 'trend' in full_forecast.columns:
+        ax.plot(full_forecast["ds"], full_forecast["trend"], label="Trend")
+        ax.set_title("Estimated trend")
+    else:
+        ax.text(0.5,0.5,"Trend not available", ha='center', va='center')
+    ax.grid(alpha=0.3)
+
+    # Panel 5: Residuals (history)
+    ax = axes[4]
+    try:
+        hist_pred = model.predict(df.rename(columns={'date':'ds'}))
+        df['yhat_hist'] = hist_pred['yhat'].values
+        df['resid'] = df['er_visits'] - df['yhat_hist']
+        ax.plot(df['date'], df['resid'])
+        ax.axhline(0, color='k', linestyle='--', alpha=0.6)
+        ax.set_title("Residuals (history)")
+    except Exception:
+        ax.text(0.5,0.5,"Residuals not computed", ha='center', va='center')
+    ax.grid(alpha=0.3)
+
+    # Panel 6: Residual distribution
+    ax = axes[5]
+    try:
+        ax.hist(df['resid'].dropna(), bins=20)
+        ax.set_title("Residuals distribution")
+    except Exception:
+        ax.text(0.5,0.5,"No residuals to show", ha='center', va='center')
+    ax.grid(alpha=0.3)
+
+    plt.tight_layout()
     st.pyplot(fig)
 
+    # ER summary (left-aligned HTML, larger font)
+    er_upcoming = full_forecast[["ds","yhat"]].tail(horizon_days)
+    latest_er = int(df["er_visits"].iloc[-1]) if "er_visits" in df.columns else 0
+    # next_day: prefer first forecasted day after last historical date
+    future_slice = full_forecast[full_forecast['ds'] > df['date'].max()]
+    if not future_slice.empty:
+        next_day_er = int(round(float(future_slice.iloc[0]["yhat"])))
+    else:
+        next_day_er = int(round(float(er_upcoming.iloc[0]["yhat"])))
+
+    er_extra = "ER model: weekly/yearly seasonality + festival flags (agar dataset me hai)."
+    er_actions = [
+        "Agar predicted > capacity: staff add karne ki taiyari rakho.",
+        "Oxygen/N95 stock check karo agar ICU load increase ho."
+    ]
+    plot_summary_card_html("ER", latest_er, next_day_er, er_upcoming, extra_text=er_extra, actions=er_actions, font_px=22)
+
     # ------------------------------------------------------
-    # ICU Forecast
+    # ICU (compact view)
     # ------------------------------------------------------
-    st.subheader("🛏️ ICU Visit Forecast")
+    st.subheader("🛏️ ICU — compact view")
+    with st.spinner("Training Prophet model for ICU..."):
+        icu_model, icu_forecast, icu_meta = train_and_forecast_with_regressors(df, 'icu_visits', horizon_days=horizon_days)
+    st.info(f"ICU model trained on {icu_meta['trained_on_rows']} days")
 
-    icu_df = df.rename(columns={"date": "ds", "icu_visits": "y"})
-    icu_model = Prophet()
-    icu_model.add_regressor("aqi")
-    icu_model.add_regressor("temp_c")
-    icu_model.add_regressor("festival")
-    icu_model.fit(icu_df)
-
-    icu_future = icu_model.make_future_dataframe(periods=horizon_days)
-    icu_future["aqi"] = icu_df["aqi"].iloc[-1]
-    icu_future["temp_c"] = icu_df["temp_c"].iloc[-1]
-    icu_future["festival"] = 0
-
-    icu_forecast = icu_model.predict(icu_future)
-
-    fig2, ax2 = plt.subplots(figsize=(10,4))
-    merged = pd.merge(icu_forecast[["ds","yhat"]], df[["date","icu_visits"]],
-                      left_on="ds", right_on="date", how="left")
-    ax2.plot(merged["ds"], merged["yhat"])
-    ax2.scatter(merged["ds"], merged["icu_visits"], s=10)
+    fig2, ax2 = plt.subplots(figsize=(8,3))
+    merged = pd.merge(icu_forecast[["ds","yhat"]], df[["date","icu_visits"]], left_on="ds", right_on="date", how="left")
+    ax2.plot(merged["ds"], merged["yhat"], label="Predicted")
+    icu_lower, icu_upper = safe_get_uncertainty(icu_forecast, icu_model, df, 'icu_visits')
+    try:
+        lower_al = pd.Series(icu_lower.values, index=icu_forecast['ds']).reindex(merged['ds']).values
+        upper_al = pd.Series(icu_upper.values, index=icu_forecast['ds']).reindex(merged['ds']).values
+        ax2.fill_between(merged["ds"], lower_al, upper_al, alpha=0.08)
+    except Exception:
+        ax2.fill_between(merged["ds"], merged["yhat"]*0.9, merged["yhat"]*1.1, alpha=0.06)
+    ax2.scatter(merged["ds"], merged["icu_visits"], s=8, label="Actual")
+    ax2.set_xlabel("Date")
+    ax2.set_ylabel("ICU visits")
+    ax2.legend()
+    ax2.grid(True, alpha=0.3)
     st.pyplot(fig2)
 
+    icu_upcoming = icu_forecast[["ds","yhat"]].tail(horizon_days)
+    latest_icu = int(df["icu_visits"].iloc[-1]) if "icu_visits" in df.columns else 0
+    future_icu = icu_forecast[icu_forecast['ds'] > df['date'].max()]
+    next_day_icu = int(round(float(future_icu.iloc[0]["yhat"]))) if not future_icu.empty else int(round(float(icu_upcoming.iloc[0]["yhat"])))
+    icu_extra = "ICU me uncertainty zyada ho sakti hai — upper band dhyaan se dekho."
+    icu_actions = [
+        "Ventilator / ICU bed availability check karo.",
+        "Critical-care staff roster review."
+    ]
+    plot_summary_card_html("ICU", latest_icu, next_day_icu, icu_upcoming, extra_text=icu_extra, actions=icu_actions, font_px=18)
+
     # ------------------------------------------------------
-    # OPD Forecast
+    # OPD (compact view)
     # ------------------------------------------------------
-    st.subheader("👨‍⚕️ OPD Visit Forecast")
+    st.subheader("👨‍⚕️ OPD — compact view")
+    with st.spinner("Training Prophet model for OPD..."):
+        opd_model, opd_forecast, opd_meta = train_and_forecast_with_regressors(df, 'opd_visits', horizon_days=horizon_days)
+    st.info(f"OPD model trained on {opd_meta['trained_on_rows']} days")
 
-    opd_df = df.rename(columns={"date": "ds", "opd_visits": "y"})
-    opd_model = Prophet()
-    opd_model.add_regressor("aqi")
-    opd_model.add_regressor("temp_c")
-    opd_model.add_regressor("festival")
-    opd_model.fit(opd_df)
-
-    opd_future = opd_model.make_future_dataframe(periods=horizon_days)
-    opd_future["aqi"] = opd_df["aqi"].iloc[-1]
-    opd_future["temp_c"] = opd_df["temp_c"].iloc[-1]
-    opd_future["festival"] = 0
-
-    opd_forecast = opd_model.predict(opd_future)
-
-    fig3, ax3 = plt.subplots(figsize=(10,4))
-    merged2 = pd.merge(opd_forecast[["ds","yhat"]], df[["date","opd_visits"]],
-                      left_on="ds", right_on="date", how="left")
-    ax3.plot(merged2["ds"], merged2["yhat"])
-    ax3.scatter(merged2["ds"], merged2["opd_visits"], s=10)
+    fig3, ax3 = plt.subplots(figsize=(8,3))
+    merged3 = pd.merge(opd_forecast[["ds","yhat"]], df[["date","opd_visits"]], left_on="ds", right_on="date", how="left")
+    ax3.plot(merged3["ds"], merged3["yhat"], label="Predicted")
+    opd_lower, opd_upper = safe_get_uncertainty(opd_forecast, opd_model, df, 'opd_visits')
+    try:
+        lower_al3 = pd.Series(opd_lower.values, index=opd_forecast['ds']).reindex(merged3['ds']).values
+        upper_al3 = pd.Series(opd_upper.values, index=opd_forecast['ds']).reindex(merged3['ds']).values
+        ax3.fill_between(merged3["ds"], lower_al3, upper_al3, alpha=0.08)
+    except Exception:
+        ax3.fill_between(merged3["ds"], merged3["yhat"]*0.9, merged3["yhat"]*1.1, alpha=0.06)
+    ax3.scatter(merged3["ds"], merged3["opd_visits"], s=8, label="Actual")
+    ax3.set_xlabel("Date")
+    ax3.set_ylabel("OPD visits")
+    ax3.legend()
+    ax3.grid(True, alpha=0.3)
     st.pyplot(fig3)
 
-    # ------------------------------------------------------
-    # AI INSIGHTS (FIRST compute everything)
-    # ------------------------------------------------------
-    trend_er = forecast["yhat"].tail(7).mean() - forecast["yhat"].tail(14).head(7).mean()
+    opd_upcoming = opd_forecast[["ds","yhat"]].tail(horizon_days)
+    latest_opd = int(df["opd_visits"].iloc[-1]) if "opd_visits" in df.columns else 0
+    future_opd = opd_forecast[opd_forecast['ds'] > df['date'].max()]
+    next_day_opd = int(round(float(future_opd.iloc[0]["yhat"]))) if not future_opd.empty else int(round(float(opd_upcoming.iloc[0]["yhat"])))
+    opd_extra = "OPD: weekday pattern and local events influence visits."
+    opd_actions = [
+        "Reception staffing adjust karna (peak days pe extra counters).",
+        "If OPD drop & ER increases: triage review karo."
+    ]
+    plot_summary_card_html("OPD", latest_opd, next_day_opd, opd_upcoming, extra_text=opd_extra, actions=opd_actions, font_px=22)
+
+    # ----------------- INSIGHTS -----------------
+    trend_er = full_forecast["yhat"].tail(7).mean() - full_forecast["yhat"].tail(14).head(7).mean()
     trend_icu = icu_forecast["yhat"].tail(7).mean() - icu_forecast["yhat"].tail(14).head(7).mean()
     trend_opd = opd_forecast["yhat"].tail(7).mean() - opd_forecast["yhat"].tail(14).head(7).mean()
 
-    # SIMPLE anomaly detection
-    last14 = df["er_visits"].tail(14)
-    mean14 = last14.mean()
-    std14 = last14.std() if last14.std() > 0 else 1
-    latest_val = last14.iloc[-1]
-    z = (latest_val - mean14) / std14
+    # Residual/z-score anomaly detection (safe)
+    try:
+        pred_on_history = model.predict(df.rename(columns={'date':'ds'}))
+        df['yhat'] = pred_on_history['yhat'].values
+        df['resid'] = df['er_visits'] - df['yhat']
+        resid_last14 = df['resid'].tail(14)
+        resid_mean = resid_last14.mean()
+        resid_std = resid_last14.std() if resid_last14.std() > 0 else 1.0
+        latest_resid = resid_last14.iloc[-1]
+        z = (latest_resid - resid_mean) / resid_std
+    except Exception:
+        z = 0.0
 
-    # ----------------- INVENTORY (MUST be created BEFORE Executive Summary) ------------------
     inv_df = generate_inventory_recommendations(df)
-
-    # ----------------- STAFFING (also needed for summary) ------------------
-    staff_df = generate_staffing_recommendations(forecast, df, capacity_multiplier)
+    staff_df = generate_staffing_recommendations(full_forecast, df, capacity_multiplier)
 
     sev_counts = {
-        "Severe Surge (Red)": len(staff_df[staff_df["overload_percent"] > 15]),
-        "Moderate (Orange)": len(staff_df[(staff_df["overload_percent"] <= 15) & (staff_df["overload_percent"] > 5)]),
-        "Near Capacity (Yellow)": len(staff_df[(staff_df["overload_percent"] <= 5) & (staff_df["overload_percent"] > -5)]),
-        "Under Capacity (Green)": len(staff_df[staff_df["overload_percent"] <= -5])
+        "Severe Surge (Red)": len(staff_df[staff_df["overload_percent"] > 15]) if not staff_df.empty else 0,
+        "Moderate (Orange)": len(staff_df[(staff_df["overload_percent"] <= 15) & (staff_df["overload_percent"] > 5)]) if not staff_df.empty else 0,
+        "Near Capacity (Yellow)": len(staff_df[(staff_df["overload_percent"] <= 5) & (staff_df["overload_percent"] > -5)]) if not staff_df.empty else 0,
+        "Under Capacity (Green)": len(staff_df[staff_df["overload_percent"] <= -5]) if not staff_df.empty else 0
     }
-
     sev = sev_counts["Severe Surge (Red)"]
     mod = sev_counts["Moderate (Orange)"]
     yel = sev_counts["Near Capacity (Yellow)"]
 
     # ------------------------------------------------------
-    # EXECUTIVE SUMMARY
+    # EXECUTIVE SUMMARY (bigger font) — ensure plain-text summary (no stray HTML)
     # ------------------------------------------------------
     st.subheader("🧠 Executive Summary")
-
-    # inventory summary
-    if "Oxygen Cylinders" in inv_df["item"].values:
+    if "item" in inv_df.columns and "Oxygen Cylinders" in inv_df["item"].values:
         inv_msg = "oxygen cylinders are running low"
-    elif "N95 Masks" in inv_df["item"].values:
+    elif "item" in inv_df.columns and "N95 Masks" in inv_df["item"].values:
         inv_msg = "N95 mask stock is low"
-    elif "Paracetamol Strips" in inv_df["item"].values:
+    elif "item" in inv_df.columns and "Paracetamol Strips" in inv_df["item"].values:
         inv_msg = "paracetamol supplies are below threshold"
     else:
         inv_msg = "All inventory levels are healthy."
 
     anomaly_msg = f"ER anomaly detected (z={z:.2f})" if abs(z) > 2 else "No ER anomalies detected."
 
-    summary = f"""
+    summary_md = textwrap.dedent(f"""
     Over the next week:
     - ER demand change: **{trend_er:+.2f}**
     - ICU demand change: **{trend_icu:+.2f}**
@@ -302,17 +479,36 @@ def main():
     Surge forecast:
     - **{sev} Severe days**, **{mod} Moderate days**, **{yel} Near-capacity days**
 
-    Inventory: {inv_msg}  
+    Inventory: {inv_msg}
     Anomaly Status: {anomaly_msg}
-    """
+    """).strip()
 
-    st.markdown(summary)
+    # Render executive summary as markdown inside a styled div (summary content is plain markdown,
+    # so we avoid accidental injected HTML in the summary string)
+    st.markdown(f'<div style="font-size:20px; line-height:1.45;">{summary_md.replace("<","&lt;").replace(">","&gt;").replace("\n","  \n")}</div>', unsafe_allow_html=True)
 
-    # ------------------------------------------------------
-    # SHOW ALL DATAFRAMES
-    # ------------------------------------------------------
+    # Inject CSS to increase font-size for subsequent markdown/tables to make content more visible
+    st.markdown("""
+    <style>
+    /* increase general markdown paragraph/list font size */
+    div[data-testid="stMarkdownContainer"] p, div[data-testid="stMarkdownContainer"] li {
+      font-size:18px !important;
+    }
+    /* make dataframe text bigger */
+    div[data-testid="stDataFrame"] { font-size:16px !important; }
+    /* increase metric font a bit */
+    div[data-testid="metric-container"] { font-size:20px !important; }
+    /* ensure download button text is readable */
+    button[title="Download"] { font-size:16px !important; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    # ----------------- BIGGER TABLES FOR VISIBILITY -----------------
     st.subheader("🧑‍⚕️ Staffing Recommendations (Next 14 Days)")
-    st.dataframe(staff_df, use_container_width=True)
+    if not staff_df.empty:
+        st.dataframe(staff_df, use_container_width=True, height=640)
+    else:
+        st.info("No staffing recommendations generated (check forecast).")
 
     st.subheader("🔥 Surge Severity Overview")
     c1, c2, c3, c4 = st.columns(4)
@@ -322,45 +518,35 @@ def main():
     c4.metric("🟢 Under Capacity", sev_counts["Under Capacity (Green)"])
 
     st.subheader("📦 Inventory Recommendations")
-    st.dataframe(inv_df, use_container_width=True)
+    st.dataframe(inv_df, use_container_width=True, height=480)
 
-    # ------------------------------------------------------
-    # ALERT LOG VIEWER
-    # ------------------------------------------------------
     st.subheader("📣 Recent Alerts (from Agent Pipeline)")
-
     if os.path.exists("alerts_log.json"):
         with open("alerts_log.json", "r", encoding="utf-8") as f:
             alerts = json.load(f)
-
         if alerts:
-            st.dataframe(pd.DataFrame(alerts[-20:]), use_container_width=True)
+            st.dataframe(pd.DataFrame(alerts[-20:]), use_container_width=True, height=480)
         else:
             st.info("No alerts yet.")
     else:
         st.info("alerts_log.json not found. Run agent_pipeline.py once.")
 
-    # ------------------------------------------------------
-    # RAW DATA
-    # ------------------------------------------------------
     if show_raw:
         st.subheader("📄 Raw Data (Last 30 Days)")
-        st.dataframe(df.tail(30), use_container_width=True)
+        st.dataframe(df.tail(30), use_container_width=True, height=480)
 
-    # ------------------------------------------------------
-    # DOWNLOAD REPORT
-    # ------------------------------------------------------
     st.subheader("📄 Download Daily Report")
-
+    # Keep report content safe (escape any < > in summary_md)
     report_html = f"""
+    <html><body>
     <h1>SwasthyaAI Daily Report</h1>
-    <pre>{summary}</pre>
+    <pre>{summary_md.replace("<", "&lt;").replace(">", "&gt;")}</pre>
     <h2>Inventory</h2>
     {inv_df.to_html(index=False)}
     <h2>Staffing</h2>
     {staff_df.to_html(index=False)}
+    </body></html>
     """
-
     st.download_button("📥 Download Daily Report (HTML)",
                        report_html,
                        "SwasthyaAI_Daily_Report.html",
