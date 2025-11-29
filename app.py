@@ -1,4 +1,4 @@
-# app.py — Final cleaned & fixed version
+# app.py — Final cleaned & fixed version (with "Run pipeline now" feature)
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -9,6 +9,19 @@ from datetime import datetime
 import plotly.express as px
 import plotly.graph_objects as go
 
+# ----------------- RUN PIPELINE IMPORTS (safe) -----------------
+import threading
+import time as _time
+import glob
+import html as _html
+
+_pipeline_import_error = None
+pipeline_run_once = None
+try:
+    from agent_pipeline import run_once as pipeline_run_once
+except Exception as e:
+    _pipeline_import_error = str(e)
+    pipeline_run_once = None
 
 # ----------------- HELPERS -----------------
 def build_calendar_heatmap_from_forecast(forecast, days=30, value_col='yhat'):
@@ -343,6 +356,43 @@ def main():
         if "heatmap_days" not in st.session_state:
             st.session_state.heatmap_days = 30
         st.session_state.heatmap_days = st.slider("Heatmap horizon (days)", 7, 60, st.session_state.heatmap_days)
+
+        # ----------------- AGENT CONTROLS (Manual run) -----------------
+        st.markdown("---")
+        st.subheader("⚙️ Agent Controls")
+
+        if pipeline_run_once is None:
+            st.info("agent_pipeline.run_once() not available in this environment.")
+            if _pipeline_import_error:
+                st.caption(_html.escape(_pipeline_import_error))
+        else:
+            if st.button("▶️ Run pipeline now"):
+                # set a simple session flag (optional)
+                st.session_state["_pipeline_running"] = True
+                try:
+                    with st.spinner("Running agent pipeline (this may take a minute)..."):
+                        pipeline_run_once()
+                    st.success("Pipeline run finished. Check Recent Alerts and reports/ directory.")
+                except Exception as err:
+                    st.error(f"Pipeline run failed: {err}")
+                finally:
+                    st.session_state["_pipeline_running"] = False
+
+            # show latest report if available
+            latest_reports = sorted(glob.glob("reports/*.html"), key=os.path.getmtime) if os.path.exists("reports") else []
+            if latest_reports:
+                latest = latest_reports[-1]
+                mtime = _time.strftime("%Y-%m-%d %H:%M:%S", _time.localtime(os.path.getmtime(latest)))
+                st.markdown(f"**Latest report:** { os.path.basename(latest) }  \n_{mtime}_")
+                try:
+                    with open(latest, "r", encoding="utf-8") as f:
+                        html_bytes = f.read()
+                    st.download_button("📥 Download latest report", html_bytes, file_name=os.path.basename(latest), mime="text/html")
+                except Exception:
+                    st.caption("Could not prepare report download.")
+            else:
+                st.info("No HTML reports found. Run the pipeline to generate one.")
+        # ----------------- END AGENT CONTROLS -----------------
 
     capacity_multiplier = st.session_state.cap_mult
 

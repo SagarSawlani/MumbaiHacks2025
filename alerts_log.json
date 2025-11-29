@@ -1510,5 +1510,19 @@
     "category": "anomaly",
     "metric": "er_visits",
     "message": "[ANOMALY] er_visits: last=136, mean=115.4, z=2.22, level=high"
+  },
+  {
+    "timestamp": "2025-11-29T07:03:27.447640",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 54, projected 7-day usage 66. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-29T07:03:29.659667",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 54, projected 7-day usage 66. Action: Order 20 oxygen cylinders immediately"
   }
 ]
