@@ -6,8 +6,96 @@ from prophet import Prophet
 import matplotlib.pyplot as plt
 import os, json, textwrap
 from datetime import datetime
+import plotly.express as px
+import plotly.graph_objects as go
+
 
 # ----------------- HELPERS -----------------
+def build_calendar_heatmap_from_forecast(forecast, days=30, value_col='yhat'):
+    """
+    Build a weeks x weekdays matrix and a Plotly heatmap figure from Prophet forecast.
+    - forecast: DataFrame with columns 'ds' (datetime) and value_col (yhat).
+    - days: how many upcoming days to show (int).
+    - returns: plotly.graph_objects.Figure
+    """
+    import pandas as pd
+    import numpy as np
+
+    # Prepare df with only needed columns and next `days`
+    df = forecast[['ds', value_col]].copy()
+    df['ds'] = pd.to_datetime(df['ds'])
+    df = df.sort_values('ds').reset_index(drop=True)
+    df = df.tail(days).reset_index(drop=True)  # last N days (should be future portion)
+
+    if df.empty:
+        raise ValueError("Forecast dataframe is empty for heatmap")
+
+    # Week index starting from 0 for the first date in this slice
+    first_date = df['ds'].dt.normalize().min()
+    df['days_from_start'] = (df['ds'].dt.normalize() - first_date).dt.days
+    df['week'] = (df['days_from_start'] // 7).astype(int)
+    df['weekday'] = df['ds'].dt.weekday  # 0=Mon .. 6=Sun
+
+    # Pivot to create weeks x weekdays matrix
+    pivot_values = df.pivot(index='week', columns='weekday', values=value_col)
+    # Reindex columns to ensure all weekdays 0..6 exist
+    pivot_values = pivot_values.reindex(columns=range(7))
+
+    # Construct matrix of date labels for hover/customdata
+    pivot_dates = df.pivot(index='week', columns='weekday', values='ds')
+    pivot_dates = pivot_dates.reindex(columns=range(7))
+
+    # Convert pivot to numpy arrays for plotting (replace missing with np.nan)
+    z = pivot_values.values.astype(float)
+    # Create string matrix for hover (dates), keep empty string for NaN cells
+    customdata = np.full(z.shape, "", dtype=object)
+    for i, wk in enumerate(pivot_values.index):
+        for j in range(7):
+            val = pivot_dates.loc[wk, j] if (wk in pivot_dates.index and j in pivot_dates.columns) else None
+            if pd.notna(val):
+                customdata[i, j] = pd.to_datetime(val).date().isoformat()
+            else:
+                customdata[i, j] = ""
+
+    # Labels for axes
+    weekday_labels = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']
+    week_labels = [f"Week {int(wk)+1}" for wk in pivot_values.index]
+
+    # Build Plotly heatmap
+    fig = go.Figure(data=go.Heatmap(
+        z=z,
+        x=weekday_labels,
+        y=week_labels,
+        text=np.round(z, 0),
+        hoverinfo='text',
+        customdata=customdata,
+        hovertemplate=
+            "<b>%{customdata}</b><br>" +
+            "Week: %{y}<br>" +
+            "Weekday: %{x}<br>" +
+            "Predicted visits: %{z:.0f}<extra></extra>",
+        colorscale='YlOrRd',
+        colorbar=dict(title='Predicted visits'),
+        zmin=np.nanmin(z) if not np.all(np.isnan(z)) else 0,
+        zmax=np.nanmax(z) if not np.all(np.isnan(z)) else 1,
+        showscale=True
+    ))
+
+    fig.update_layout(
+        title=f"Patient load heatmap — next {len(df)} days",
+        xaxis_title="Weekday",
+        yaxis_title="Week (rolling window)",
+        yaxis_autorange='reversed',  # have earliest week at top
+        margin=dict(t=50, l=120, r=40, b=40),
+        template='plotly_dark'
+    )
+
+    # If lots of weeks, increase height
+    fig.update_layout(height=200 + 60 * len(week_labels))
+
+    # Annotate cells with numbers (optional) — handled by text arg above
+    return fig
+
 def future_regressor_by_dayofyear(df, col, future_df):
     tmp = df.copy()
     tmp['doy'] = tmp['date'].dt.dayofyear
@@ -248,6 +336,14 @@ def main():
         if "cap_mult" not in st.session_state:
             st.session_state.cap_mult = 10
         st.session_state.cap_mult = st.slider("Patients per ER staff per day", 5, 20, st.session_state.cap_mult)
+
+        # NEW: calendar heatmap days selector
+        st.markdown("---")
+        st.markdown("📅 Calendar heatmap")
+        if "heatmap_days" not in st.session_state:
+            st.session_state.heatmap_days = 30
+        st.session_state.heatmap_days = st.slider("Heatmap horizon (days)", 7, 60, st.session_state.heatmap_days)
+
     capacity_multiplier = st.session_state.cap_mult
 
     # ---------------- ER MODEL & 2x3 SUBPLOT LAYOUT ----------------
@@ -337,6 +433,20 @@ def main():
 
     plt.tight_layout()
     st.pyplot(fig)
+
+    # ----------------- ER calendar heatmap (NEW) -----------------
+    try:
+        # get slider value from session state (falls back to 30)
+        heatmap_days = int(st.session_state.get("heatmap_days", 30))
+        # build heatmap from the full forecast (uses 'yhat' by default)
+        heatmap_fig = build_calendar_heatmap_from_forecast(full_forecast, days=heatmap_days, value_col='yhat')
+        st.subheader(f"📅 ER load calendar (next {heatmap_days} days)")
+        st.write("Color intensity shows predicted ER visits. Hover a cell for date + predicted value.")
+        st.plotly_chart(heatmap_fig, use_container_width=True)
+    except Exception as e:
+        # don't break the app if heatmap fails; show a helpful warning
+        st.warning(f"Could not render calendar heatmap: {e}")
+    # ----------------- end heatmap -----------------
 
     # ER summary
     er_upcoming = full_forecast[["ds","yhat"]].tail(horizon_days)
