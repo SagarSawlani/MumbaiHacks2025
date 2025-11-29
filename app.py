@@ -506,10 +506,10 @@ def main():
         next_day_er = int(round(float(future_slice.iloc[0]["yhat"])))
     else:
         next_day_er = int(round(float(er_upcoming.iloc[0]["yhat"])))
-    er_extra = "ER model: weekly/yearly seasonality + festival flags (agar dataset me hai)."
+    er_extra = "ER model: weekly/yearly seasonality + festival flags"
     er_actions = [
-        "Agar predicted > capacity: staff add karne ki taiyari rakho.",
-        "Oxygen/N95 stock check karo agar ICU load increase ho."
+        "If predicted > capacity: Be ready to Add staff.",
+        "Keep a check on Oxygen/N95 stock if ICU load increases."
     ]
     plot_summary_card_html("ER", latest_er, next_day_er, er_upcoming, extra_text=er_extra, actions=er_actions, font_px=22)
 
@@ -593,9 +593,9 @@ def main():
     latest_icu = int(df["icu_visits"].iloc[-1]) if "icu_visits" in df.columns else 0
     future_icu = icu_forecast[icu_forecast['ds'] > df['date'].max()]
     next_day_icu = int(round(float(future_icu.iloc[0]["yhat"]))) if not future_icu.empty else int(round(float(icu_upcoming.iloc[0]["yhat"])))
-    icu_extra = "ICU me uncertainty zyada ho sakti hai — upper band dhyaan se dekho."
+    icu_extra = "ICU may have uncertainity, observe the upper band properly."
     icu_actions = [
-        "Ventilator / ICU bed availability check karo.",
+        "Check Ventilator / ICU bed availability.",
         "Critical-care staff roster review."
     ]
     plot_summary_card_html("ICU", latest_icu, next_day_icu, icu_upcoming, extra_text=icu_extra, actions=icu_actions, font_px=18)
@@ -629,8 +629,8 @@ def main():
     next_day_opd = int(round(float(future_opd.iloc[0]["yhat"]))) if not future_opd.empty else int(round(float(opd_upcoming.iloc[0]["yhat"])))
     opd_extra = "OPD: weekday pattern and local events influence visits."
     opd_actions = [
-        "Reception staffing adjust karna (peak days pe extra counters).",
-        "If OPD drop & ER increases: triage review karo."
+        "Adjust reception staffing (especially on peak days).",
+        "If OPD drop & ER increases: triage review."
     ]
     plot_summary_card_html("OPD", latest_opd, next_day_opd, opd_upcoming, extra_text=opd_extra, actions=opd_actions, font_px=22)
 

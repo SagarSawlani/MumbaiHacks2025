@@ -1524,5 +1524,19 @@
     "category": "inventory",
     "item": "Oxygen Cylinders",
     "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 54, projected 7-day usage 66. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-29T07:36:52.954678",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 54, projected 7-day usage 66. Action: Order 20 oxygen cylinders immediately"
+  },
+  {
+    "timestamp": "2025-11-29T07:37:11.818999",
+    "channel": "whatsapp+sms",
+    "category": "inventory",
+    "item": "Oxygen Cylinders",
+    "message": "[INVENTORY ALERT] Oxygen Cylinders: stock 54, projected 7-day usage 66. Action: Order 20 oxygen cylinders immediately"
   }
 ]
